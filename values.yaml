@@ -1,0 +1,74 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+## Namespace to deploy pulsar manager
+namespace: pulsar
+namespaceCreate: no
+
+## If persistence is enabled, components that has state will
+## be deployed with PersistentVolumeClaims, otherwise, for test
+## purposes, they will be deployed with emptDir
+persistence: yes
+
+manager:
+  enable: yes
+  component: manager
+  replicaCount: 1
+  # nodeSelector:
+    # cloud.google.com/gke-nodepool: default-pool
+  annotations: {}
+  tolerations: []
+  gracePeriod: 0
+  image:
+    repository: streamnative/pulsar-manager
+    tag: latest
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 0.1
+  volumes:
+    data:
+      name: data
+      size: 4Gi
+  ## Manager configmap
+  ## templates/manager-configmap.yaml
+  ## 
+  configData:
+    REDIRECT_HOST: "http://127.0.0.1"
+    REDIRECT_PORT: "9527"
+    DRIVER_CLASS_NAME: "org.postgresql.Driver"
+    URL: "jdbc:postgresql://127.0.0.1:5432/pulsar_manager"
+    USERNAME: "pulsar"
+    PASSWORD: "pulsar"
+  ## Manager service
+  ## templates/manager-service.yaml
+  ## 
+  service:
+    annotations: {}
+    type: NodePort
+    ports:
+    - name: postgresql
+      port: 5432
+      nodePort: 5432
+      protocol: TCP
+    - name: manager
+      port: 9527
+      nodePort: 9527
+      protocol: TCP
