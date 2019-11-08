@@ -1,4 +1,7 @@
 # Pulsar Manager helm chart
+
+![pulsar logo](https://pulsar.apache.org/img/pulsar.svg)
+
 Helm chart for [pulsar-manager](https://github.com/apache/pulsar-manager).
 
 ## Description
