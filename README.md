@@ -15,7 +15,7 @@ cd pulsar-manager
 helm install --values manager/values.yaml ./manager
 ```
 
-## Configuration in [template/manager-configmap.yaml](template/manager-configmap.yaml)
+## Configuration in [templates/manager-configmap.yaml](templates/manager-configmap.yaml)
 
  ENV Variable      | Description                                                                             |
 ------------------ | --------------------------------------------------------------------------------------- |
@@ -30,6 +30,6 @@ For further details, you may refer to the related sources.
 
 ## Related Sources
 
-Github repo: [apache/pulsar](https://github.com/apache/pulsar)
-Guthub repo: [apache/pulsar-manager](https://github.com/apache/pulsar-manager)
-Docker image: [streamnative/pulsar-manager](https://hub.docker.com/r/streamnative/pulsar-manager)
+Github repo: [apache/pulsar](https://github.com/apache/pulsar)  
+Guthub repo: [apache/pulsar-manager](https://github.com/apache/pulsar-manager)  
+Docker image: [streamnative/pulsar-manager](https://hub.docker.com/r/streamnative/pulsar-manager)  
